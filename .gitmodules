@@ -1,0 +1,12 @@
+[submodule "qtjsonserializer"]
+	path = qtjsonserializer
+	url = git@github.com:Skycoder42/QtJsonSerializer.git
+[submodule "qtrestclient"]
+	path = qtrestclient
+	url = git@github.com:Skycoder42/QtRestClient.git
+[submodule "qtdatasync"]
+	path = qtdatasync
+	url = git@github.com:Skycoder42/QtDataSync.git
+[submodule "qtautoupdater"]
+	path = qtautoupdater
+	url = git@github.com:Skycoder42/QtAutoUpdater.git
