@@ -19,7 +19,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 		cp -R ../qtmods qtmods
 		echo Building $mod...
 		./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
-		cp -R install/* /qtmods/
+		cp -R install/* ../qtmods/
 		popd
 	done
 else
