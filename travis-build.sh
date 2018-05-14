@@ -5,7 +5,6 @@ set -e
 if [[ $LTS_MODS = *qtdatasync* ]]; then
 	pushd qtdatasync
 	./src/3rdparty/cryptopp/travis.sh
-	./tests/ci/setup.sh
 	popd
 fi
 
