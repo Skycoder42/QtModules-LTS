@@ -1,13 +1,23 @@
-#!/bin/bash
-set -e
+@echo on
+setlocal
 
-mkdir -p install
-for mod in $LTS_MODS; do
-	pushd $mod
-	echo Packaging $mod...
-	./qtmodules-travis/ci/$TRAVIS_OS_NAME/upload-prepare.sh
-	cp install/*.tar.xz ../install/
-	popd
-done
+if "%PLATFORM%" == "winrt_x64_msvc2017" set LTS_MODS=qtjsonserializer qtrestclient qtdatasync
+if "%PLATFORM%" == "winrt_x86_msvc2017" set LTS_MODS=qtjsonserializer qtrestclient qtdatasync
+if "%PLATFORM%" == "winrt_armv7_msvc2017" set LTS_MODS=qtjsonserializer qtrestclient
+if "%PLATFORM%" == "mingw53_32" set LTS_MODS=qtjsonserializer qtrestclient qtautoupdater
+if "%PLATFORM%" == "static" set LTS_MODS=qtrestclient
 
-ls -lsa install/
+for %%m in (%LTS_MODS%) do (
+	mkdir -p install\%%m
+	cd %%m
+	echo Packaging %%m ...
+	.\qtmodules-travis\ci\$TRAVIS_OS_NAME\upload-prepare.bat || exit /B 1
+	cd install
+	rename *.zip %%m_??????????????????????????????????.* || exit /B 1
+	cd ..
+	xcopy /e /s /t /i install\*.zip ..\install\ || exit /B 1
+	cd ..
+)
+
+cd install
+dir

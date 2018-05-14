@@ -16,27 +16,33 @@ env:
     - NO_TESTS=true
     - EXTRA_MODULES=".qtremoteobjects"
     - STATIC_QT_MODS="qttools qtwebsockets qtscxml qtremoteobjects"
-    - LTS_MODS="qtjsonserializer qtrestclient qtdatasync qtautoupdater"
+    - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtdatasync qtautoupdater"
+    - LTS_MODS_MOBILE="qtjsonserializer qtrestclient qtdatasync"
 
 matrix:
   include:
     - os: linux
       env:
         - PLATFORM=gcc_64
+        - LTS_MODS=$LTS_MODS_DESKTOP
         - BUILD_DOC=true
         - BUILD_EXAMPLES=true
     - os: linux
       env:
         - PLATFORM=android_armv7
+        - LTS_MODS=$LTS_MODS_MOBILE
     - os: linux
       env:
         - PLATFORM=android_x86
+        - LTS_MODS=$LTS_MODS_MOBILE
     - os: osx
       env:
         - PLATFORM=clang_64
+        - LTS_MODS=$LTS_MODS_DESKTOP
     - os: osx
       env:
         - PLATFORM=ios
+        - LTS_MODS=$LTS_MODS_MOBILE
     - os: linux
       env:
         - PLATFORM=static
@@ -62,7 +68,7 @@ deploy:
   api_key:
     secure: <key>
   file_glob: true
-  file: install/opt/build_*_$QT_VER.tar.xz
+  file: install/*_build_*_$QT_VER.tar.xz
   on:
     repo: Skycoder42/QtModules-LTS
     tags: true

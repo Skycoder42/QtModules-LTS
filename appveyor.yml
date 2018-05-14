@@ -49,7 +49,7 @@ after_build:
   - .\appveyor-deploy.bat
 
 artifacts:
-  - path: install\build_*_%QT_VER%.zip
+  - path: install\*_build_*_%QT_VER%.zip
 
 deploy:
   provider: GitHub
