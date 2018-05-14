@@ -7,6 +7,7 @@ version: build-{build}
 environment:
   QT_VER: 5.9.5
   IS_LTS: true
+  NO_TESTS: true
   LTS_MODS: qtjsonserializer qtrestclient qtdatasync qtautoupdater
 
   matrix:

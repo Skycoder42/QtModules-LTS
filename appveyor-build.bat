@@ -12,6 +12,9 @@ for %%m in (%LTS_MODS%) do (
 	xcopy /e /s /i /f ..\qtmodules-travis\* qtmodules-travis\ || exit /B 1
 	echo Building %%m ...
 	call .\qtmodules-travis\ci\win\build.bat || exit /B 1
+	dir
+	dir /s install
 	xcopy /e /s /i /f install\* C:\ || exit /B 1
+	echo cpdone
 	cd ..
 )
