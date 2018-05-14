@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# run submodule setup scripts where needed
+if [[ $LTS_MODS = *qtdatasync* ]]; then
+	pushd qtdatasync
+	./src/3rdparty/cryptopp/travis.sh
+	./tests/ci/setup.sh
+	popd
+fi
+
 if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	# inject code to keep qt mods over each image
 	buildFile=qtmodules-travis/ci/$TRAVIS_OS_NAME/build-docker.sh
