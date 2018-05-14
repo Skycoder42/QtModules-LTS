@@ -15,7 +15,7 @@ env:
     - IS_LTS=true
     - NO_TESTS=true
     - EXTRA_MODULES=".qtremoteobjects"
-    - STATIC_QT_MODS="qtwebsockets qtscxml qtremoteobjects"
+    - STATIC_QT_MODS="qttools qtwebsockets qtscxml qtremoteobjects"
     - LTS_MODS="qtjsonserializer qtrestclient qtdatasync qtautoupdater"
 
 matrix:
@@ -52,6 +52,7 @@ before_install:
 
 script:
   - ./travis-build.sh
+  - ./travis-deploy.sh #for debug
 
 before_deploy:
   - ./travis-deploy.sh
