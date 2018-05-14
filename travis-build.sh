@@ -12,6 +12,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	chmod +x $buildFile
 
 	mkdir qtmods
+	touch qtmods/dummy.txt
 	for mod in $LTS_MODS; do
 		pushd $mod
 		cp -R ../qtmodules-travis qtmodules-travis
