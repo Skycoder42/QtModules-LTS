@@ -7,7 +7,7 @@ for mod in $LTS_MODS; do
 	echo Packaging $mod...
 	./qtmodules-travis/ci/$TRAVIS_OS_NAME/upload-prepare.sh
 	#rename build_ ${mod}_build_ install/*.tar.xz
-	find install/ -type f -printf "%f\0" | xargs --null -I{} mv install/{} "install/${mod}_{}"
+	find install/ -type f -name "*.tar.xz" -maxdepth 1 -printf "%f\0" | xargs --null -I{} mv install/{} "install/${mod}_{}"
 	cp install/*.tar.xz ../install
 	popd
 done
