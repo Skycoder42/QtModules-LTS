@@ -9,6 +9,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	echo 'set -e' >> $buildFile
 	echo 'cp -R ./qtmods/* /' >> $buildFile
 	cat /tmp/build-docker.sh >> $buildFile
+	chmod +x $buildFile
 
 	mkdir qtmods
 	for mod in $LTS_MODS; do
