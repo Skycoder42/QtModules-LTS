@@ -11,11 +11,11 @@ env:
   global:
     - QPMX_CACHE_DIR=$HOME/.qpmx-cache
     - QT_VER=5.9.5
+    - DOCKER_IMAGE=lts
     - IS_LTS=true
-    - DOCKER_IMAGE=base
-    - LTS_MODS="qtjsonserializer qtrestclient qtdatasync qtautoupdater"
     - EXTRA_MODULES=".qtremoteobjects"
     - STATIC_QT_MODS="qtwebsockets qtscxml qtremoteobjects"
+    - LTS_MODS="qtjsonserializer qtrestclient qtdatasync qtautoupdater"
 
 matrix:
   include:
