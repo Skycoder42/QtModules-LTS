@@ -7,13 +7,17 @@ if "%PLATFORM%" == "winrt_armv7_msvc2017" set LTS_MODS=qtjsonserializer qtrestcl
 if "%PLATFORM%" == "mingw53_32" set LTS_MODS=qtjsonserializer qtrestclient qtautoupdater
 if "%PLATFORM%" == "static" set LTS_MODS=qtrestclient
 
+mkdir install
 for %%m in (%LTS_MODS%) do (
-	mkdir -p install\%%m
+	mkdir install\%%m
 	cd %%m
 	echo Packaging %%m ...
 	call .\qtmodules-travis\ci\win\upload-prepare.bat || exit /B 1
+	dir
 	cd install
-	rename *.zip %%m_??????????????????????????????????.* || exit /B 1
+	dir
+	for %%f in (*.zip) do rename "%%f" "%%m_%%f"
+	dir
 	cd ..
 	xcopy /e /s /i install\*.zip ..\install\ || exit /B 1
 	cd ..
