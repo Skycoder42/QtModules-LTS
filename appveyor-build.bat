@@ -6,8 +6,6 @@ if "%PLATFORM%" == "winrt_armv7_msvc2017" set LTS_MODS=qtjsonserializer qtrestcl
 if "%PLATFORM%" == "mingw53_32" set LTS_MODS=qtjsonserializer qtrestclient qtautoupdater
 if "%PLATFORM%" == "static" set LTS_MODS=qtrestclient
 
-call .\qtdatasync\src\3rdparty\cryptopp\appveyor.bat || exit /B 1
-
 setlocal
 for %%m in (%LTS_MODS%) do (
 	:: prepare install dir link

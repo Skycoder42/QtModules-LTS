@@ -13,11 +13,8 @@ for %%m in (%LTS_MODS%) do (
 	cd %%m
 	echo Packaging %%m ...
 	call .\qtmodules-travis\ci\win\upload-prepare.bat || exit /B 1
-	dir
 	cd install
-	dir
-	for %%f in (*.zip) do rename "%%f" "%%m_%%f"
-	dir
+	for /f "delims=" %%f in ('dir /b *.zip') do rename "%%f" "%%m_%%f"
 	cd ..
 	xcopy /e /s /i install\*.zip ..\install\ || exit /B 1
 	cd ..
