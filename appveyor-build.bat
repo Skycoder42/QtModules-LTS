@@ -15,7 +15,8 @@ for %%m in (%LTS_MODS%) do (
 	
 	cd %%m
 	:: copy over ci + build
-	xcopy /e /s /i ..\qtmodules-travis\* qtmodules-travis\ || exit /B 1
+	mklink /D qtmodules-travis ..\qtmodules-travis
+	if "%%m" == "qtdatasync" call .\src\3rdparty\cryptopp\appveyor.bat || exit /B 1
 	echo Building %%m ...
 	call .\qtmodules-travis\ci\win\build.bat || exit /B 1
 	:: copy install stuff into qt install
