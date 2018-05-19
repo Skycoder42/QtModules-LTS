@@ -4,7 +4,7 @@ setlocal
 if "%PLATFORM%" == "winrt_x64_msvc2017" set LTS_MODS=qtjsonserializer qtrestclient qtdatasync
 if "%PLATFORM%" == "winrt_x86_msvc2017" set LTS_MODS=qtjsonserializer qtrestclient qtdatasync
 if "%PLATFORM%" == "winrt_armv7_msvc2017" set LTS_MODS=qtjsonserializer qtrestclient
-if "%PLATFORM%" == "mingw53_32" set LTS_MODS=qtjsonserializer qtrestclient qtautoupdater
+if "%PLATFORM%" == "mingw53_32" set LTS_MODS=qtjsonserializer qtrestclient
 if "%PLATFORM%" == "static" set LTS_MODS=qtrestclient
 
 mkdir install
