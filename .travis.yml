@@ -66,7 +66,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: <key>
+    secure: EVJOmAKEPL3iCm8iPpwj5w8bsNK5b8gxKIXKfoLTCZ3Isvezr7ZH5MFWZ2PbItZ+JiKcXtQpp6ZN0xXPLHLzoXtWyqMTtwrZIepyVKjlFW/smcfYiTBuaw6onUGxK6TmQvfi9JSOlX25thF+Hle+XkwcGKS1VzL6qVhx5TSzmsyw7XPb693OkfF69Dj5ImT+Y9gCdIlBReViRELIkm4uV/l4XdSAa2Ig29uh+y5uznTZ7S8kvtVPmukzjQaHaz1LgMtECEJVMksruEC2tSuNUei3O5LOXhMhMLArxsYtkK9SH+P0FcDQUQnVJd+uCyghTKJmOerF4y96Ewnj7PMDvoFpOY9ac8k6BdoREOGOF+x7nS2aFPVgXcu4IfJYOZCqQbIc8sZWNN8VYAZHUBpBwGPKF/nNzGdpCHddKz/XCFKs5C0hsHuqwhXJGzjYLZghUuy+J20fd4V7mdUrslppWlT/MiPyFUrrKb5q9hhlzn9DZinn5o/kzpgMcj8NxdtPhTrF2RqcPEUyXoeW+1VvJX/tTPH1g1e1wMk1eR7TX+Dcj5V0kaCgG0rW0Ki8f8vDTjLWUIE48MXdiBiRQhXwbniesX4ppqOOoY6RA0mamc7asesbCt+AmZxfKM64hML2n+k3K9KfV4gF/qpymWZqNElfugudWE27SwA54Dy1QfY=
   file_glob: true
   file: install/*_build_*_$QT_VER.tar.xz
   on:
