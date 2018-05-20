@@ -58,7 +58,6 @@ before_install:
 
 script:
   - ./travis-build.sh
-  - ./travis-deploy.sh #for debug
 
 before_deploy:
   - ./travis-deploy.sh
