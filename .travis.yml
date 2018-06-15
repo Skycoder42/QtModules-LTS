@@ -10,7 +10,7 @@ osx_image: xcode9.2
 env:
   global:
     - QPMX_CACHE_DIR=$HOME/.qpmx-cache
-    - QT_VER=5.9.5
+    - QT_VER=5.9.6
     - DOCKER_IMAGE=lts
     - IS_LTS=true
     - NO_TESTS=true
