@@ -54,6 +54,7 @@ matrix:
 
 before_install:
   - git clone https://github.com/Skycoder42/QtModules.git ./qtmodules-travis
+  - cd qtmodules-travis && git checkout 56214ee608d2ffcd6ab94e378fe24470c5f579bf && cd ..
   - travis_wait 40 ./qtmodules-travis/ci/$TRAVIS_OS_NAME/setup.sh
 
 script:

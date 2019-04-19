@@ -45,6 +45,7 @@ install:
   - git submodule init
   - git submodule update
   - git clone https://github.com/Skycoder42/QtModules.git .\qtmodules-travis
+  - cd qtmodules-travis && git checkout 56214ee608d2ffcd6ab94e378fe24470c5f579bf && cd ..
   - .\qtmodules-travis\ci\win\setup.bat
 
 build_script:
