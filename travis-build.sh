@@ -12,7 +12,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	chmod +x $buildFile
 
 	mkdir qtmods
-	touch qtmods/.dummy
+	touch qtmods/dummy
 	
 	for mod in $LTS_MODS; do
 		export TARGET_NAME=$mod
