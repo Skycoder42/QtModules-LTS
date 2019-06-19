@@ -1,12 +1,21 @@
 [submodule "qtjsonserializer"]
 	path = qtjsonserializer
-	url = https://github.com/Skycoder42/QtJsonSerializer.git
+	url = ../QtJsonSerializer.git
 [submodule "qtrestclient"]
 	path = qtrestclient
-	url = https://github.com/Skycoder42/QtRestClient.git
+	url = ../QtRestClient.git
 [submodule "qtdatasync"]
 	path = qtdatasync
-	url = https://github.com/Skycoder42/QtDataSync.git
+	url = ../QtDataSync.git
 [submodule "qtautoupdater"]
 	path = qtautoupdater
-	url = https://github.com/Skycoder42/QtAutoUpdater.git
+	url = ../QtAutoUpdater.git
+[submodule "qtservice"]
+	path = qtservice
+	url = ../QtService.git
+[submodule "qtmvvm"]
+	path = qtmvvm
+	url = ../QtMvvm.git
+[submodule "qtapng"]
+	path = qtapng
+	url = ../QtApng.git
