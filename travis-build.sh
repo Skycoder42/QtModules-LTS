@@ -7,7 +7,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	mv $buildFile /tmp/build-docker.sh
 	echo '#!/bin/bash' > $buildFile
 	echo 'set -e' >> $buildFile
-	echo 'cp -R ./qtmods/* /' >> $buildFile
+	echo 'cp -Rp ./qtmods/* /' >> $buildFile
 	cat /tmp/build-docker.sh >> $buildFile
 	chmod +x $buildFile
 
@@ -17,21 +17,21 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	for mod in $LTS_MODS; do
 		export TARGET_NAME=$mod
 		pushd $mod
-		ln ../qtmodules-travis qtmodules-travis
-		ln ../qtmods qtmods
+		cp -Rp ../qtmodules-travis qtmodules-travis
+		cp -Rp ../qtmods qtmods
 		echo Building $mod...
 		./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
-		cp -R install/* ../qtmods/
+		cp -Rp install/* ../qtmods/
 		popd
 	done
 else
 	for mod in $LTS_MODS; do
 		export TARGET_NAME=$mod
 		pushd $mod
-		ln ../qtmodules-travis qtmodules-travis
+		ln -s ../qtmodules-travis qtmodules-travis
 		echo Building $mod...
 		./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
-		sudo cp -R install/* /
+		sudo cp -Rp install/* /
 		popd
 	done
 fi

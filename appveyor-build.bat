@@ -7,6 +7,7 @@ if "%PLATFORM%" == "winrt_armv7_msvc2017" set LTS_MODS=qtjsonserializer qtrestcl
 
 setlocal
 for %%m in (%LTS_MODS%) do (
+	set TARGET_NAME=%%m
 	:: prepare install dir link
 	mklink /D C:\projects\%%m C:\projects\qtmodules-lts\%%m
 	

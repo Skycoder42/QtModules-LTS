@@ -40,8 +40,7 @@ matrix:
       image: Visual Studio 2017
 
 install:
-  - git submodule init
-  - git submodule update
+  - git submodule update --init --recursive
   - .\qtmodules-travis\ci\win\setup.bat
 
 build_script:

@@ -8,6 +8,7 @@ if "%PLATFORM%" == "winrt_armv7_msvc2017" set LTS_MODS=qtjsonserializer qtrestcl
 
 mkdir install
 for %%m in (%LTS_MODS%) do (
+	set TARGET_NAME=%%m
 	mkdir install\%%m
 	cd %%m
 	echo Packaging %%m ...
