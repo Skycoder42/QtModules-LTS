@@ -15,7 +15,9 @@ env:
     - IS_LTS=true
     - NO_TESTS=true
     - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtautoupdater qtapng"
-    - LTS_MODS_MOBILE="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtapng"
+    - LTS_MODS_MOBILE1="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm"
+    - LTS_MODS_MOBILE2="qtapng"
+    - LTS_MODS_MOBILE="$LTS_MODS_MOBILE1 $LTS_MODS_MOBILE2"
     - LTS_MODS_WASM="qtjsonserializer qtrestclient qtservice qtmvvm qtapng"
 
 matrix:
@@ -49,7 +51,11 @@ matrix:
     - os: osx
       env:
         - PLATFORM=ios
-        - LTS_MODS=$LTS_MODS_MOBILE
+        - LTS_MODS=$LTS_MODS_MOBILE1
+    - os: osx
+      env:
+        - PLATFORM=ios
+        - LTS_MODS=$LTS_MODS_MOBILE2
 
 before_install:
   - travis_wait 40 ./qtmodules-travis/ci/$TRAVIS_OS_NAME/setup.sh
