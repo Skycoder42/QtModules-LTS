@@ -18,7 +18,6 @@ env:
     - LTS_MODS_MOBILE1="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm"
     - LTS_MODS_MOBILE2="qtapng"
     - LTS_MODS_MOBILE="$LTS_MODS_MOBILE1 $LTS_MODS_MOBILE2"
-    - LTS_MODS_WASM="qtjsonserializer qtrestclient qtservice qtmvvm qtapng"
 
 matrix:
   include:
@@ -40,10 +39,6 @@ matrix:
       env:
         - PLATFORM=android_x86
         - LTS_MODS=$LTS_MODS_MOBILE
-    - os: linux
-      env:
-        - PLATFORM=emscripten
-        - LTS_MODS=$LTS_MODS_WASM
     - os: osx
       env:
         - PLATFORM=clang_64

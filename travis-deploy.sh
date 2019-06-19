@@ -1,10 +1,10 @@
 #!/bin/bash
 set -ex
 
-find .
-
 for mod in $LTS_MODS; do
-	df
+	ls -lsa "$mod/"
+	ls -lsa "$mod/install/"
+
 	export TARGET_NAME=$mod
 	mkdir -p install/$mod
 	pushd $mod
