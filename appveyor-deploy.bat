@@ -1,4 +1,4 @@
-@echo on
+@echo off
 setlocal
 
 if "%PLATFORM%" == "msvc2015_64" set LTS_MODS=qtjsonserializer qtrestclient qtmvvm qtautoupdater qtapng
