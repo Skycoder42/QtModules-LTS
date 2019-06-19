@@ -5,19 +5,18 @@ services:
 
 sudo: required
 dist: trusty
-osx_image: xcode9.2
+osx_image: xcode10.2
 
 env:
   global:
-    - QPMX_CACHE_DIR=$HOME/.qpmx-cache
-    - QT_VER=5.9.8
+    - QDEP_CACHE_DIR=$HOME/.qdep-cache
+    - QT_VER=5.12.4
     - DOCKER_IMAGE=lts
     - IS_LTS=true
     - NO_TESTS=true
-    - EXTRA_MODULES=".qtremoteobjects"
-    - STATIC_QT_MODS="qttools qtwebsockets qtscxml qtremoteobjects"
-    - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtdatasync qtautoupdater"
-    - LTS_MODS_MOBILE="qtjsonserializer qtrestclient qtdatasync"
+    - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtautoupdater qtapng"
+    - LTS_MODS_MOBILE="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtapng"
+    - LTS_MODS_WASM="qtjsonserializer qtrestclient qtservice qtmvvm qtapng"
 
 matrix:
   include:
@@ -29,12 +28,20 @@ matrix:
         - BUILD_EXAMPLES=true
     - os: linux
       env:
+        - PLATFORM=android_arm64_v8a
+        - LTS_MODS=$LTS_MODS_MOBILE
+    - os: linux
+      env:
         - PLATFORM=android_armv7
         - LTS_MODS=$LTS_MODS_MOBILE
     - os: linux
       env:
         - PLATFORM=android_x86
         - LTS_MODS=$LTS_MODS_MOBILE
+    - os: linux
+      env:
+        - PLATFORM=emscripten
+        - LTS_MODS=$LTS_MODS_WASM
     - os: osx
       env:
         - PLATFORM=clang_64
@@ -43,22 +50,13 @@ matrix:
       env:
         - PLATFORM=ios
         - LTS_MODS=$LTS_MODS_MOBILE
-    - os: linux
-      env:
-        - PLATFORM=static
-        - LTS_MODS="qtrestclient"
-    - os: osx
-      env:
-        - PLATFORM=static
-        - LTS_MODS="qtrestclient"
 
 before_install:
-  - git clone https://github.com/Skycoder42/QtModules.git ./qtmodules-travis
-  - cd qtmodules-travis && git checkout 56214ee608d2ffcd6ab94e378fe24470c5f579bf && cd ..
   - travis_wait 40 ./qtmodules-travis/ci/$TRAVIS_OS_NAME/setup.sh
 
 script:
   - ./travis-build.sh
+  - ./travis-deploy.sh
 
 before_deploy:
   - ./travis-deploy.sh
@@ -68,19 +66,17 @@ deploy:
   api_key:
     secure: EVJOmAKEPL3iCm8iPpwj5w8bsNK5b8gxKIXKfoLTCZ3Isvezr7ZH5MFWZ2PbItZ+JiKcXtQpp6ZN0xXPLHLzoXtWyqMTtwrZIepyVKjlFW/smcfYiTBuaw6onUGxK6TmQvfi9JSOlX25thF+Hle+XkwcGKS1VzL6qVhx5TSzmsyw7XPb693OkfF69Dj5ImT+Y9gCdIlBReViRELIkm4uV/l4XdSAa2Ig29uh+y5uznTZ7S8kvtVPmukzjQaHaz1LgMtECEJVMksruEC2tSuNUei3O5LOXhMhMLArxsYtkK9SH+P0FcDQUQnVJd+uCyghTKJmOerF4y96Ewnj7PMDvoFpOY9ac8k6BdoREOGOF+x7nS2aFPVgXcu4IfJYOZCqQbIc8sZWNN8VYAZHUBpBwGPKF/nNzGdpCHddKz/XCFKs5C0hsHuqwhXJGzjYLZghUuy+J20fd4V7mdUrslppWlT/MiPyFUrrKb5q9hhlzn9DZinn5o/kzpgMcj8NxdtPhTrF2RqcPEUyXoeW+1VvJX/tTPH1g1e1wMk1eR7TX+Dcj5V0kaCgG0rW0Ki8f8vDTjLWUIE48MXdiBiRQhXwbniesX4ppqOOoY6RA0mamc7asesbCt+AmZxfKM64hML2n+k3K9KfV4gF/qpymWZqNElfugudWE27SwA54Dy1QfY=
   file_glob: true
-  file: install/*_build_*_$QT_VER.tar.xz
+  file: install/*_*_$QT_VER.tar.xz
   on:
     repo: Skycoder42/QtModules-LTS
     tags: true
 
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
-  - rm -rf $QPMX_CACHE_DIR/locks
-  - rm -rf $QPMX_CACHE_DIR/tmp
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
-    - $QPMX_CACHE_DIR
+    - $QDEP_CACHE_DIR

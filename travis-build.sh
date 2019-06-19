@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e
 
-# run submodule setup scripts where needed
-if [[ $LTS_MODS = *qtdatasync* ]]; then
-	pushd qtdatasync
-	./src/3rdparty/cryptopp/travis.sh
-	popd
-fi
-
 if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	# inject code to keep qt mods over each image
 	buildFile=qtmodules-travis/ci/$TRAVIS_OS_NAME/build-docker.sh
@@ -19,11 +12,13 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	chmod +x $buildFile
 
 	mkdir qtmods
-	touch qtmods/dummy.txt
+	touch qtmods/.dummy
+	
 	for mod in $LTS_MODS; do
+		export TARGET_NAME=$mod
 		pushd $mod
-		cp -R ../qtmodules-travis qtmodules-travis
-		cp -R ../qtmods qtmods
+		ln ../qtmodules-travis qtmodules-travis
+		ln ../qtmods qtmods
 		echo Building $mod...
 		./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
 		cp -R install/* ../qtmods/
@@ -31,8 +26,9 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	done
 else
 	for mod in $LTS_MODS; do
+		export TARGET_NAME=$mod
 		pushd $mod
-		ln -s ../qtmodules-travis qtmodules-travis
+		ln ../qtmodules-travis qtmodules-travis
 		echo Building $mod...
 		./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
 		sudo cp -R install/* /

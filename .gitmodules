@@ -19,3 +19,6 @@
 [submodule "qtapng"]
 	path = qtapng
 	url = ../QtApng.git
+[submodule "qtmodules-travis"]
+	path = qtmodules-travis
+	url = ../QtModules.git
