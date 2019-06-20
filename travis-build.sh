@@ -22,10 +22,17 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	touch qtmods/dummy
 	
 	for mod in $LTS_MODS; do
-		# disable autoupdater examples
+		# disable qtautoupdater examples
 		if [ "$mod" == "qtautoupdater" ]; then
-			echo "disabeling examples!"
-			export BUILD_EXAMPLES=false
+			exp=false
+		else
+			exp=$BUILD_EXAMPLES
+		fi
+		# disable qtapng doc
+		if [ "$mod" == "qtapng" ]; then
+			doc=false
+		else
+			doc=$BUILD_DOC
 		fi
 	
 		export TARGET_NAME=$mod
@@ -33,7 +40,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 		cp -Rp ../qtmodules-travis qtmodules-travis
 		cp -Rp ../qtmods qtmods
 		echo Building $mod...
-		./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
+		BUILD_EXAMPLES=$exp BUILD_DOC=$doc ./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
 		cp -Rp install/* ../qtmods/
 		popd
 	done
