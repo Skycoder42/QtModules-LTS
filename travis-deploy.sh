@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 for mod in $LTS_MODS; do
 	# disable qtapng docs
@@ -16,5 +16,3 @@ for mod in $LTS_MODS; do
 	cp install/*.tar.xz ../install
 	popd
 done
-
-ls -lsa
