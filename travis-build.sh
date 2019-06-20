@@ -25,7 +25,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 		# disable autoupdater examples
 		if [ "$mod" == "qtapng" ]; then
 			echo "disabeling docs!"
-			export BUILD_DOC=false
+			export BUILD_DOC=
 		fi
 	
 		export TARGET_NAME=$mod
