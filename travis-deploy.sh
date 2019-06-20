@@ -1,10 +1,7 @@
 #!/bin/bash
-set -ex
+set -e
 
 for mod in $LTS_MODS; do
-	ls -lsa "$mod/"
-	ls -lsa "$mod/install/"
-
 	export TARGET_NAME=$mod
 	mkdir -p install/$mod
 	pushd $mod
@@ -13,5 +10,3 @@ for mod in $LTS_MODS; do
 	cp install/*.tar.xz ../install
 	popd
 done
-
-ls -lsa install/

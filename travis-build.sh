@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+if [ -n "$DOWNLOAD_MODS" ]; then
+	for mod in $DOWNLOAD_MODS; do
+		curl -Lo "/tmp/${mod}.tar.xz" "https://github.com/Skycoder42/QtModules-LTS/releases/download/${QT_VER}-lts/${mod}_${PLATFORM}_${QT_VER}.tar.xz"
+		sudo tar xf "/tmp/${mod}.tar.xz" -C "/opt/qt/${QT_VER}/"
+	done
+fi
+
 if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	# inject code to keep qt mods over each image
 	buildFile=qtmodules-travis/ci/$TRAVIS_OS_NAME/build-docker.sh
@@ -15,6 +22,12 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	touch qtmods/dummy
 	
 	for mod in $LTS_MODS; do
+		# disable autoupdater examples
+		if [ "$mod" == "qtautoupdater" ]; then
+			echo "disabeling examples!"
+			export BUILD_EXAMPLES=false
+		fi
+	
 		export TARGET_NAME=$mod
 		pushd $mod
 		cp -Rp ../qtmodules-travis qtmodules-travis

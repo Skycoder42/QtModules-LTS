@@ -14,9 +14,9 @@ env:
     - DOCKER_IMAGE=lts
     - IS_LTS=true
     - NO_TESTS=true
-    - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtautoupdater qtapng"
-    - LTS_MODS_MOBILE1="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm"
-    - LTS_MODS_MOBILE2="qtapng"
+    - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtapng qtautoupdater"  # build qtautoupdater last because it disables the samples
+    - LTS_MODS_MOBILE1="qtjsonserializer qtservice qtdatasync"
+    - LTS_MODS_MOBILE2="qtrestclient qtmvvm qtapng"
     - LTS_MODS_MOBILE="$LTS_MODS_MOBILE1 $LTS_MODS_MOBILE2"
 
 matrix:
@@ -51,6 +51,7 @@ matrix:
       env:
         - PLATFORM=ios
         - LTS_MODS=$LTS_MODS_MOBILE2
+        - DOWNLOAD_MODS=$LTS_MODS_MOBILE1
 
 before_install:
   - travis_wait 40 ./qtmodules-travis/ci/$TRAVIS_OS_NAME/setup.sh
