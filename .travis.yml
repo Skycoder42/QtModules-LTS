@@ -14,7 +14,7 @@ env:
     - DOCKER_IMAGE=lts
     - IS_LTS=true
     - NO_TESTS=true
-    - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtapng qtautoupdater"  # build qtautoupdater last because it disables the samples
+    - LTS_MODS_DESKTOP="qtjsonserializer qtrestclient qtservice qtdatasync qtmvvm qtautoupdater qtapng"  # build qtapng last because it disables the docs
     - LTS_MODS_MOBILE1="qtjsonserializer qtservice qtdatasync"
     - LTS_MODS_MOBILE2="qtrestclient qtmvvm qtapng"
     - LTS_MODS_MOBILE="$LTS_MODS_MOBILE1 $LTS_MODS_MOBILE2"
