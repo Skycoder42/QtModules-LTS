@@ -22,7 +22,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 	touch qtmods/dummy
 	
 	for mod in $LTS_MODS; do
-		# disable autoupdater examples
+		# disable qtapng docs
 		if [ "$mod" == "qtapng" ]; then
 			echo "disabeling docs!"
 			export BUILD_DOC=

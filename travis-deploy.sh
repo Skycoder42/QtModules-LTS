@@ -1,7 +1,13 @@
 #!/bin/bash
-set -e
+set -ex
 
 for mod in $LTS_MODS; do
+	# disable qtapng docs
+	if [ "$mod" == "qtapng" ]; then
+		echo "disabeling docs!"
+		export BUILD_DOC=
+	fi
+	
 	export TARGET_NAME=$mod
 	mkdir -p install/$mod
 	pushd $mod
@@ -10,3 +16,5 @@ for mod in $LTS_MODS; do
 	cp install/*.tar.xz ../install
 	popd
 done
+
+ls -lsa
