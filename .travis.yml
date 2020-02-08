@@ -10,7 +10,7 @@ osx_image: xcode10.3
 env:
   global:
     - QDEP_CACHE_DIR=$HOME/.qdep-cache
-    - QT_VER=5.12.6
+    - QT_VER=5.12.7
     - DOCKER_IMAGE=lts
     - IS_LTS=true
     - NO_TESTS=true
